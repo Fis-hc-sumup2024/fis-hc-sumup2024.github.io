@@ -1,0 +1,45 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to bottom, #123456, #abcdef); /* Nền gradient */
+  background-size: cover;
+  overflow: hidden; /* Đảm bảo nội dung không cuộn */
+}
+
+body {
+  position: relative;
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: env(safe-area-inset-top); /* Đảm bảo nội dung không bị thanh trạng thái che */
+  padding-bottom: env(safe-area-inset-bottom); /* Xử lý các khoảng trắng ở cạnh dưới */
+  padding-left: env(safe-area-inset-left); /* Xử lý cạnh trái (tai thỏ nếu có) */
+  padding-right: env(safe-area-inset-right); /* Xử lý cạnh phải */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(env(safe-area-inset-top) + 50px); /* Thêm chiều cao thanh trạng thái + header */
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 100;
+}
