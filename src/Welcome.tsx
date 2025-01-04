@@ -110,7 +110,7 @@ const Welcome = ({ setAccount }: WelcomeProps) => {
   };
 
   return (
-    <div className="w-full h-dvh mx-auto flex flex-col bg-fis-bg bg-no-repeat bg-cover items-center">
+    <div className="w-full h-dvh mx-auto flex flex-col items-center">
       {/* Main Content */}
       <div className="sm:w-full md:w-full lg:w-1/2 flex-grow flex flex-col justify-between p-6 relative overflow-hidden">
         {/* Form */}
