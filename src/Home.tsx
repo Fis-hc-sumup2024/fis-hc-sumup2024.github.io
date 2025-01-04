@@ -1,11 +1,9 @@
-import React from "react";
-
 interface HomeProps {
   account?: string | null;
-  setAccount?: (account: string) => void;
+  setAccount?: (account: string | null) => void;
 }
 
-const Home = ({ account, setAccount }: HomeProps) => {
+const Home: React.FC<HomeProps> = () => {
   return (
     <div className="w-full mx-auto h-screen flex flex-col bg-fis-bg bg-no-repeat bg-cover items-center">
       {/* Main Content */}

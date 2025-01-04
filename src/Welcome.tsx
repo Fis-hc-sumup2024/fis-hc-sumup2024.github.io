@@ -1,52 +1,73 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import FIS from "./assets/fis.svg";
 import Header from "./assets/header.svg";
-import Select from "react-select";
+import Select, { components } from "react-select";
+import { diagnosItems } from "./common";
+
+const CustomDropdownIndicator = (props: any) => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M4 6L7.5286 9.5286C7.75082 9.75082 7.86193 9.86193 8 9.86193C8.13807 9.86193 8.24918 9.75082 8.4714 9.5286L12 6"
+          stroke="white"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </components.DropdownIndicator>
+  );
+};
+
+const CustomIndicatorSeparator = () => null;
 
 interface WelcomeProps {
-  account?: string | null;
   setAccount?: (newValue: string) => void;
 }
 
-const Welcome = ({ account, setAccount }: WelcomeProps) => {
+const Welcome = ({ setAccount }: WelcomeProps) => {
   const [inputAccount, setInputAccount] = useState<string>();
 
-  const options = [
-    {
-      value: "google",
-      label: "google",
-    },
-    {
-      value: "bing",
-      label: "bing",
-    },
-    {
-      value: "yahoo",
-      label: "yahoo",
-    },
-  ];
-
   const customStyles = {
-    control: (provided) => ({
+    control: (provided: any) => ({
       // class attribute : class=" css-i32vvf-control"
       ...provided,
+      color: "#FFFFFF",
       background: "#FFFFFF1A",
+      backdropFilter: "blur(20px)",
+      WebkitBackdropFilter: "blur(20px)",
+      border: "1px solid #FFFFFF4D",
+      borderRadius: "8px",
+      // This line disable the blue border
+      boxShadow: "none",
       display: "flex",
       flexWrap: "nowrap",
       // borderColor: "hsl(0deg 78.56% 55.56%);",
       width: "100%",
+      "&:hover": {
+        border: "1px solid #FFFFFF4D",
+      },
     }),
-    menu: (provided) => ({
+    menu: (provided: any) => ({
       // 'menu' is from the div class too.
       ...provided,
+      padding: "8px",
       backgroundColor: "#FFFFFF33",
       backdropFilter: "blur(75px)",
+      WebkitBackdropFilter: "blur(75px)",
       boxShadow: "0px 2px 10px 0px #00000026",
       border: "1px solid #FFFFFF4D",
       borderRadius: "8px",
       width: "100%",
     }),
-    option: (provided, state) => ({
+    option: (provided: any, state: any) => ({
       ...provided,
       color: state.isSelected ? "#02018B" : "#ffffff",
       background: state.isSelected
@@ -55,12 +76,17 @@ const Welcome = ({ account, setAccount }: WelcomeProps) => {
         ? "#DFE1E61A"
         : "transparent",
       padding: "10px",
-      borderRadius: "4px",
+      borderRadius: "8px",
       cursor: "pointer",
       "&:hover": {
         backgroundColor: "#DFE1E61A", // Đảm bảo hover hoạt động
       },
     }),
+    placeholder: (provided: any) => ({
+      ...provided,
+      color: "white", // Placeholder màu trắng
+    }),
+    singleValue: (base: any) => ({ ...base, color: "white" }),
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -84,7 +110,7 @@ const Welcome = ({ account, setAccount }: WelcomeProps) => {
   };
 
   return (
-    <div className="w-full mx-auto h-screen flex flex-col bg-fis-bg bg-no-repeat bg-cover items-center">
+    <div className="w-full h-dvh mx-auto flex flex-col bg-fis-bg bg-no-repeat bg-cover items-center">
       {/* Main Content */}
       <div className="sm:w-full md:w-full lg:w-1/2 flex-grow flex flex-col justify-between p-6 relative overflow-hidden">
         {/* Form */}
@@ -104,8 +130,14 @@ const Welcome = ({ account, setAccount }: WelcomeProps) => {
             ></input>
             <Select
               styles={customStyles}
-              className="z-40 w-full h-[40px] bg-white-blur-10 placeholder-white backdrop-blur-[20px] rounded-[8px] text-left flex justify-between items-center border border-white-blur-30"
-              options={options}
+              className="z-40 w-full h-[40px] placeholder-white text-left flex justify-between items-center"
+              options={diagnosItems}
+              placeholder="Năm 2024 của bạn như thế nào?"
+              isSearchable={false}
+              components={{
+                IndicatorSeparator: CustomIndicatorSeparator,
+                DropdownIndicator: CustomDropdownIndicator,
+              }}
             />
             <button
               style={{
@@ -120,9 +152,11 @@ const Welcome = ({ account, setAccount }: WelcomeProps) => {
           </div>
         </div>
         {/* Footer */}
-        <div className="flex justify-center items-center text-xs">
-          <img src={FIS} alt="FPT IS logo" className="h-[60px] w-[120px]" />
-          <span>Made by FIS HC</span>
+        <div className="absolute w-[calc(100%-3rem)] bottom-0 m-auto footer">
+          <div className="flex justify-center items-center text-xs">
+            <img src={FIS} alt="FPT IS logo" className="h-[60px] w-[120px]" />
+            <span>Made by FIS HC</span>
+          </div>
         </div>
       </div>
     </div>

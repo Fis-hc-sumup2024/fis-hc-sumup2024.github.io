@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 
 // ----------------------------------------------------------------------
@@ -5,7 +6,7 @@ import { useState, useEffect } from "react";
 export default function useLocalStorage<ValueType>(
   key: string,
   defaultValue: ValueType
-) {
+): [ValueType | string, (newValue: ValueType) => void] {
   const [value, setValue] = useState(() => {
     const storedValue = localStorage.getItem(key);
     return storedValue === null ? defaultValue : storedValue;
