@@ -4,6 +4,8 @@ import FIS from "./assets/fis.svg";
 import Header from "./assets/header.svg";
 import Select, { components } from "react-select";
 import { diagnosItems } from "./common";
+import { useLoading } from "./hooks/useLoading";
+import LoadingOverlay from "@achmadk/react-loading-overlay";
 
 const CustomDropdownIndicator = (props: any) => {
   return (
@@ -33,6 +35,7 @@ interface WelcomeProps {
 }
 
 const Welcome = ({ setAccount }: WelcomeProps) => {
+  const isLoading = useLoading();
   const [inputAccount, setInputAccount] = useState<string>();
 
   const customStyles = {
@@ -110,56 +113,64 @@ const Welcome = ({ setAccount }: WelcomeProps) => {
   };
 
   return (
-    <div className="w-full h-dvh mx-auto flex flex-col bg-fis-bg bg-fis-position bg-no-repeat bg-cover items-center">
-      {/* Main Content */}
-      <div className="sm:w-full md:w-full lg:w-1/2 flex-grow flex flex-col justify-between p-6 relative overflow-hidden">
-        {/* Form */}
-        <div>
-          <div className="relative z-20 mt-[53px] mb-[-33px]">
-            <img
-              className="z-20"
-              src={Header}
-              alt="A friendly cartoon-style AI robot with a round head, big eyes, and antenna, waving with one hand"
-            />
-          </div>
-          <div className="gap-4 bg-white-blur-15 backdrop-blur-[20px] rounded-[20px] py-8 px-6 space-y-3 relative z-10 border border-white-blur-15">
-            <input
-              className="w-full h-[40px] leading-[23.8px] bg-white-blur-10 placeholder-white backdrop-blur-[20px] rounded-[8px] text-left px-4 border border-white-blur-30"
-              placeholder="Nhập account FPT"
-              onChange={onChange}
-            ></input>
-            <Select
-              styles={customStyles}
-              className="z-40 w-full h-[40px] placeholder-white text-left flex justify-between items-center"
-              options={diagnosItems}
-              placeholder="Năm 2024 của bạn như thế nào?"
-              isSearchable={false}
-              components={{
-                IndicatorSeparator: CustomIndicatorSeparator,
-                DropdownIndicator: CustomDropdownIndicator,
-              }}
-            />
-            <button
-              style={{
-                background:
-                  "linear-gradient(185.85deg, #78F1FF 4.04%, #6BD2DE 94.76%), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))",
-              }}
-              className="w-full h-[40px] bg-btn text-text-btn py-3 backdrop-blur-[20px] rounded-[8px] font-bold"
-              onClick={onSubmit}
-            >
-              CHẨN ĐOÁN VUI
-            </button>
+    <LoadingOverlay active={isLoading} spinner text="Loading your content...">
+      {!isLoading && (
+        <div className="w-full h-dvh mx-auto flex flex-col bg-fis-bg bg-fis-position bg-no-repeat bg-cover items-center">
+          {/* Main Content */}
+          <div className="sm:w-full md:w-full lg:w-1/2 flex-grow flex flex-col justify-between p-6 relative overflow-hidden">
+            {/* Form */}
+            <div>
+              <div className="relative z-20 mt-[53px] mb-[-33px]">
+                <img
+                  className="z-20"
+                  src={Header}
+                  alt="A friendly cartoon-style AI robot with a round head, big eyes, and antenna, waving with one hand"
+                />
+              </div>
+              <div className="gap-4 bg-white-blur-15 backdrop-blur-[20px] rounded-[20px] py-8 px-6 space-y-3 relative z-10 border border-white-blur-15">
+                <input
+                  className="w-full h-[40px] leading-[23.8px] bg-white-blur-10 placeholder-white backdrop-blur-[20px] rounded-[8px] text-left px-4 border border-white-blur-30"
+                  placeholder="Nhập account FPT"
+                  onChange={onChange}
+                ></input>
+                <Select
+                  styles={customStyles}
+                  className="z-40 w-full h-[40px] placeholder-white text-left flex justify-between items-center"
+                  options={diagnosItems}
+                  placeholder="Năm 2024 của bạn như thế nào?"
+                  isSearchable={false}
+                  components={{
+                    IndicatorSeparator: CustomIndicatorSeparator,
+                    DropdownIndicator: CustomDropdownIndicator,
+                  }}
+                />
+                <button
+                  style={{
+                    background:
+                      "linear-gradient(185.85deg, #78F1FF 4.04%, #6BD2DE 94.76%), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))",
+                  }}
+                  className="w-full h-[40px] bg-btn text-text-btn py-3 backdrop-blur-[20px] rounded-[8px] font-bold"
+                  onClick={onSubmit}
+                >
+                  CHẨN ĐOÁN VUI
+                </button>
+              </div>
+            </div>
+            {/* Footer */}
+            <div className="absolute w-[calc(100%-3rem)] bottom-0 m-auto footer">
+              <div className="flex justify-center items-center text-xs">
+                <img
+                  src={FIS}
+                  alt="FPT IS logo"
+                  className="h-[60px] w-[120px]"
+                />
+                <span>Made by FIS HC</span>
+              </div>
+            </div>
           </div>
         </div>
-        {/* Footer */}
-        <div className="absolute w-[calc(100%-3rem)] bottom-0 m-auto footer">
-          <div className="flex justify-center items-center text-xs">
-            <img src={FIS} alt="FPT IS logo" className="h-[60px] w-[120px]" />
-            <span>Made by FIS HC</span>
-          </div>
-        </div>
-      </div>
-    </div>
+      )}
+    </LoadingOverlay>
   );
 };
 
