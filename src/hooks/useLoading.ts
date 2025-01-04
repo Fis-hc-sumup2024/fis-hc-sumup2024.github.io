@@ -4,8 +4,12 @@ export const useLoading = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    window.onload = () => {
+    const handlePageLoad = () => {
       setIsLoading(false);
+    };
+    window.addEventListener("load", handlePageLoad);
+    return () => {
+      window.removeEventListener("load", handlePageLoad);
     };
   }, []);
 
