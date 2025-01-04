@@ -2,14 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  overflow: hidden;
+}
+
 input:focus-visible {
-    outline: none;
-  }
+  outline: none;
+}
   
-  select:focus-visible {
-    outline: none;
-  }
+select:focus-visible {
+  outline: none;
+}
 
 .footer {
-    padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
 }

@@ -18,7 +18,10 @@ export default {
       },
       backgroundImage: {
         'fis-bg': "url('/src/assets/bg.svg')",
-      }
+      },
+      backgroundPosition: {
+        'fis-position': '0px -3px',
+      },
     },
   },
   plugins: [],
