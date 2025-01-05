@@ -1,6 +1,7 @@
 import Avatar from "../assets/avatar.png";
 import RobotAnswer from "../components/RobotAnswer";
 import Warning from "../components/Warning";
+import useInnerHeight from "../hooks/useInnerHeight";
 import { CheckInType } from "../type";
 
 interface HomeProps {
@@ -9,9 +10,14 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = () => {
+  const innerHeight = useInnerHeight();
+
   return (
     <div>
-      <div className="flex flex-col items-center mt-[53px] gap-4 bg-white-blur-15 backdrop-blur-[20px] rounded-[20px] py-8 px-6 border border-white-blur-15">
+      <div
+        style={{ gap: innerHeight > 750 ? "16px" : "8px" }}
+        className="flex flex-col items-center bg-white-blur-15 backdrop-blur-[20px] rounded-[20px] py-8 px-6 border border-white-blur-15"
+      >
         <div className="w-[138px] h-[138px] rounded-full flex items-center justify-center">
           <img
             src={Avatar}

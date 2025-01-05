@@ -27,7 +27,7 @@ function App() {
       spinner
       text="Loading your content..."
     >
-      <Layout>
+      <Layout isChildrenCenter={!!data}>
         {data && !isLoading && (
           <Home localData={localData} setLocalData={setLocalData} />
         )}
