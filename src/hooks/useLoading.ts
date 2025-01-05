@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useLoading = () => {
+export const useLoading = (): [boolean, (newValue: boolean) => void] => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -19,5 +19,5 @@ export const useLoading = () => {
     };
   }, []);
 
-  return isLoading;
+  return [isLoading, setIsLoading];
 };

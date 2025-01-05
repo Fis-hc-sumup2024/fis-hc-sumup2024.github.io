@@ -13,6 +13,10 @@ export default {
         'white-blur-20': '#FFFFFF33',
         'white-blur-30': '#FFFFFF4D'
       },
+      fontSize: {
+        sm: ['14px', '23.8px'],
+        xl: ['32px', '54.4px'],
+      },
       fontFamily: {
         josefin: ['Josefin Sans'],
       },
