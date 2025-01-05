@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import FIS from "./assets/fis.svg";
-import Header from "./assets/header.svg";
+import FIS from "./components/Footer";
+import Header from "./components/Header";
 import Select, { components } from "react-select";
 import { diagnosItems } from "./common";
 import { useLoading } from "./hooks/useLoading";
@@ -20,8 +20,8 @@ const CustomDropdownIndicator = (props: any) => {
         <path
           d="M4 6L7.5286 9.5286C7.75082 9.75082 7.86193 9.86193 8 9.86193C8.13807 9.86193 8.24918 9.75082 8.4714 9.5286L12 6"
           stroke="white"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </components.DropdownIndicator>
@@ -115,17 +115,13 @@ const Welcome = ({ setAccount }: WelcomeProps) => {
   return (
     <LoadingOverlay active={isLoading} spinner text="Loading your content...">
       {!isLoading && (
-        <div className="w-full h-dvh mx-auto flex flex-col bg-fis-bg bg-fis-position bg-no-repeat bg-cover items-center">
+        <div className="w-full h-dvh mx-auto flex flex-col items-center">
           {/* Main Content */}
           <div className="sm:w-full md:w-full lg:w-1/2 flex-grow flex flex-col justify-between p-6 relative overflow-hidden">
             {/* Form */}
             <div>
               <div className="relative z-20 mt-[53px] mb-[-33px]">
-                <img
-                  className="z-20"
-                  src={Header}
-                  alt="A friendly cartoon-style AI robot with a round head, big eyes, and antenna, waving with one hand"
-                />
+                <Header />
               </div>
               <div className="gap-4 bg-white-blur-15 backdrop-blur-[20px] rounded-[20px] py-8 px-6 space-y-3 relative z-10 border border-white-blur-15">
                 <input
@@ -159,11 +155,7 @@ const Welcome = ({ setAccount }: WelcomeProps) => {
             {/* Footer */}
             <div className="absolute w-[calc(100%-3rem)] bottom-0 m-auto footer">
               <div className="flex justify-center items-center text-xs">
-                <img
-                  src={FIS}
-                  alt="FPT IS logo"
-                  className="h-[60px] w-[120px]"
-                />
+                <FIS />
                 <span>Made by FIS HC</span>
               </div>
             </div>

@@ -7,7 +7,13 @@ export const useLoading = () => {
     const handlePageLoad = () => {
       setIsLoading(false);
     };
-    window.addEventListener("load", handlePageLoad);
+
+    if (document.readyState === "complete") {
+      handlePageLoad();
+    } else {
+      window.addEventListener("load", handlePageLoad);
+    }
+
     return () => {
       window.removeEventListener("load", handlePageLoad);
     };
