@@ -15,8 +15,12 @@ const Home: React.FC<HomeProps> = () => {
   return (
     <div>
       <div
-        style={{ gap: innerHeight > 750 ? "16px" : "8px" }}
-        className="flex flex-col items-center bg-white-blur-15 backdrop-blur-[20px] rounded-[20px] py-8 px-6 border border-white-blur-15"
+        style={
+          innerHeight > 750
+            ? { gap: "16px", paddingTop: "32px", paddingBottom: "32px" }
+            : { gap: "4px", paddingTop: "8px", paddingBottom: "8px" }
+        }
+        className="flex flex-col items-center bg-white-blur-15 backdrop-blur-[20px] rounded-[20px] px-6 border border-white-blur-15"
       >
         <div className="w-[138px] h-[138px] rounded-full flex items-center justify-center">
           <img
@@ -27,8 +31,11 @@ const Home: React.FC<HomeProps> = () => {
         <h2 className="font-semibold">Chào PhuongNB4</h2>
         <p>Số may mắn của bạn là</p>
         <p
-          style={{ boxShadow: "0px 1px 1px 0px #00000040" }}
-          className="text-[#72E2F0] text-xl"
+          style={{
+            textShadow: "0px 1px 1px 0px #00000040",
+            lineHeight: innerHeight > 750 ? "54.4px" : "36px",
+          }}
+          className="text-[#72E2F0] text-xl text-center items-center"
         >
           72
         </p>
