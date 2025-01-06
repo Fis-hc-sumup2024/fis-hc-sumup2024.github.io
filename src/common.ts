@@ -1,3 +1,7 @@
+export const wait = (timeout: number | undefined) => {
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+};
+
 export function randomNumber() {
   return Math.floor(Math.random() * 1001);
 }

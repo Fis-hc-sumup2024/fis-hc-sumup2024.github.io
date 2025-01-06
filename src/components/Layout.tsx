@@ -12,7 +12,7 @@ const Layout = ({ children }: LayoutProps) => {
         {/* Content */}
         {children}
         {/* Footer */}
-        <div className="absolute w-[calc(100%-3rem)] bottom-0 m-auto footer">
+        <div className="absolute w-[calc(100%-3rem)] lg:w-[calc(50%-3rem)] bottom-0 m-auto footer">
           <div className="flex justify-center items-center text-xs">
             <FIS />
             <span>Made by FIS HC</span>

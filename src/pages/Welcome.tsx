@@ -52,7 +52,7 @@ const Welcome = ({ setLocalData, setIsLoading }: WelcomeProps) => {
       <div className="relative z-20 mb-[-33px]">
         <Header />
       </div>
-      <div className="gap-4 bg-white-blur-15 before:backdrop-blur-[20px] rounded-[20px] py-8 px-6 space-y-3 relative z-10 border border-white-blur-15">
+      <div className="backdrop-parent gap-4 bg-white-blur-15 rounded-[20px] py-8 px-6 space-y-3 relative z-10">
         <input
           className="w-full h-[40px] bg-white-blur-10 placeholder-white backdrop-blur-[20px] rounded-[8px] text-left px-4 border border-white-blur-30"
           placeholder="Nhập account FPT"
@@ -71,7 +71,7 @@ const Welcome = ({ setLocalData, setIsLoading }: WelcomeProps) => {
               : "linear-gradient(185.85deg, #78F1FF 4.04%, #6BD2DE 94.76%), linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1))",
           }}
           className={`w-full h-[40px] py-3 backdrop-blur-[20px] rounded-[8px] font-bold cursor-pointer ${
-            !inValid ? "active:scale-[.98] transition duration-200" : ""
+            !inValid ? "active:scale-[.8] transition duration-200" : ""
           }`}
           onClick={onSubmit}
         >
