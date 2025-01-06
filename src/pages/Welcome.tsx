@@ -46,8 +46,8 @@ const Welcome = ({ setLocalData, setIsLoading }: WelcomeProps) => {
   };
 
   return (
-    <div>
-      <div className="relative z-20 mt-[53px] mb-[-33px]">
+    <div className="mt-[53px]">
+      <div className="relative z-20 mb-[-33px]">
         <Header />
       </div>
       <div className="gap-4 bg-white-blur-15 backdrop-blur-[20px] rounded-[20px] py-8 px-6 space-y-3 relative z-10 border border-white-blur-15">

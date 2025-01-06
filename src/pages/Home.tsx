@@ -13,7 +13,7 @@ const Home: React.FC<HomeProps> = () => {
   const innerHeight = useInnerHeight();
 
   return (
-    <div>
+    <div className="h-full flex-grow flex flex-col justify-center">
       <div
         style={
           innerHeight > 750

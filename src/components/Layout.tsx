@@ -2,18 +2,13 @@ import FIS from "./Footer";
 
 interface LayoutProps {
   children?: React.ReactNode;
-  isChildrenCenter?: boolean;
 }
 
-const Layout = ({ children, isChildrenCenter }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="w-full h-dvh mx-auto flex flex-col items-center">
+    <div className="w-full h-full mx-auto flex flex-col items-center">
       {/* Main Content */}
-      <div
-        className={`w-full lg:w-1/2 flex-grow flex flex-col p-6 relative overflow-hidden ${
-          isChildrenCenter ? "justify-center" : "justify-between"
-        }`}
-      >
+      <div className={`w-full lg:w-1/2 h-[calc(100%-60px)] p-6`}>
         {/* Content */}
         {children}
         {/* Footer */}
