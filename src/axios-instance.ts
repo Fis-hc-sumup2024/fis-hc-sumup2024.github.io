@@ -3,7 +3,6 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import { wait } from "./common";
 
 declare module "axios" {
   interface AxiosRequestConfig {
@@ -14,10 +13,9 @@ declare module "axios" {
 }
 
 export const loadingHandler = () => {
-  const addRequestId = async (
+  const addRequestId = (
     config: InternalAxiosRequestConfig<AxiosRequestConfig>
   ) => {
-    await wait(1000);
     const requestId = config.url || "";
     config.requestIds = config.requestIds || [];
     config.requestIds.push(requestId);

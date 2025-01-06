@@ -39,8 +39,9 @@ const Welcome = ({ setLocalData, setIsLoading }: WelcomeProps) => {
         diagnosId: selectedOption.value,
       },
       {
-        onSuccess(checkinData) {
-          if (checkinData && setLocalData) setLocalData(checkinData);
+        onSuccess(checkinData?: CheckInType[]) {
+          if (checkinData && checkinData.length && setLocalData)
+            setLocalData(checkinData[0]);
           if (setIsLoading) setIsLoading(false);
         },
       }

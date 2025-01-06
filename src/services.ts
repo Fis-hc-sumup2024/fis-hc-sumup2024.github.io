@@ -17,7 +17,9 @@ export const getCheckinData = async (
   account: string
 ): Promise<CheckInType | undefined> => {
   try {
-    const checkinListRes = await axiosInstance.get(sheetId);
+    const checkinListRes = await axiosInstance.get(
+      `${sheetId}/account/${account}`
+    );
     if (checkinListRes?.data)
       return checkinListRes.data.find(
         (item: CheckInType) => item.account === account
@@ -45,7 +47,7 @@ export const checkinProcess = async ({
 }: {
   account: string;
   diagnosId: number;
-}): Promise<CheckInType | undefined> => {
+}): Promise<CheckInType[] | undefined> => {
   try {
     const checkinList = await getCheckinList();
     const existItem = checkinList.find(
