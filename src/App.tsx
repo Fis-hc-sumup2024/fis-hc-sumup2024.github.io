@@ -7,17 +7,10 @@ import { useQuery } from "react-query";
 import { CheckInType } from "./type";
 import { useLoading } from "./hooks/useLoading";
 import LoadingOverlay from "@achmadk/react-loading-overlay";
-import { useLottie } from "lottie-react";
+import Lottie from "lottie-react";
 import groovyWalkAnimation from "./assets/anim.json";
 
 function App() {
-  const { View } = useLottie(
-    {
-      animationData: groovyWalkAnimation,
-      loop: true,
-    },
-    { height: "25%", margin: "auto" }
-  );
   const [isLoadingDOM, setIsLoading] = useLoading();
   const [localData, setLocalData] = useLocalStorage<CheckInType | null>(
     "localData",
@@ -33,13 +26,19 @@ function App() {
   return (
     <LoadingOverlay
       active={isLoading || isLoadingDOM}
+      spinner={
+        <Lottie
+          className="h-1/4 m-auto"
+          animationData={groovyWalkAnimation}
+          loop={true}
+        />
+      }
       text={
         <>
           <p>Chúng tôi biết bạn đang chờ đợi.</p>
           <p>Chúng tôi cũng vậy :))</p>
         </>
       }
-      spinner={View}
     >
       <Layout>
         {data && !isLoading && (

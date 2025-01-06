@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { wait } from "../common";
 
 export const useLoading = (): [boolean, (newValue: boolean) => void] => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const handlePageLoad = () => {
+    const handlePageLoad = async () => {
+      await wait(1000);
       setIsLoading(false);
     };
 
