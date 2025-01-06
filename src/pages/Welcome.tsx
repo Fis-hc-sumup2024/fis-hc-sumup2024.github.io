@@ -52,7 +52,7 @@ const Welcome = ({ setLocalData, setIsLoading }: WelcomeProps) => {
       <div className="relative z-20 mb-[-33px]">
         <Header />
       </div>
-      <div className="gap-4 bg-white-blur-15 backdrop-blur-[20px] rounded-[20px] py-8 px-6 space-y-3 relative z-10 border border-white-blur-15">
+      <div className="gap-4 bg-white-blur-15 before:backdrop-blur-[20px] rounded-[20px] py-8 px-6 space-y-3 relative z-10 border border-white-blur-15">
         <input
           className="w-full h-[40px] bg-white-blur-10 placeholder-white backdrop-blur-[20px] rounded-[8px] text-left px-4 border border-white-blur-30"
           placeholder="Nhập account FPT"
