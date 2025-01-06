@@ -6,6 +6,7 @@ import { useMutation } from "react-query";
 import { SingleValue } from "react-select";
 import { CheckInType, OptionType } from "../type";
 import { checkinProcess } from "../services";
+import useInnerHeight from "../hooks/useInnerHeight";
 
 interface WelcomeProps {
   setLocalData?: (newValue: CheckInType | null) => void;
@@ -13,6 +14,7 @@ interface WelcomeProps {
 }
 
 const Welcome = ({ setLocalData, setIsLoading }: WelcomeProps) => {
+  const innerHeight = useInnerHeight();
   const [inputAccount, setInputAccount] = useState<string>();
   const [selectedOption, setSelectedOption] =
     useState<SingleValue<OptionType>>(null);
@@ -47,7 +49,10 @@ const Welcome = ({ setLocalData, setIsLoading }: WelcomeProps) => {
 
   return (
     <div className="mt-[53px]">
-      <div className="relative z-20 mb-[-33px]">
+      <div
+        style={{ marginTop: innerHeight > 650 ? "53px" : "0px" }}
+        className="relative z-20 mb-[-33px]"
+      >
         <Header />
       </div>
       <div className="gap-4 bg-white-blur-15 backdrop-blur-[20px] rounded-[20px] py-8 px-6 space-y-3 relative z-10 border border-white-blur-15">
