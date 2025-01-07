@@ -32,6 +32,8 @@ export function getRandomItemByDiagnosId(
   return filteredItems[randomIndex];
 }
 
+export const regexValidAccount = /^(?=.*[a-zA-Z])[a-zA-Z0-9]+$/;
+
 export const diagnosCategories = [
   {
     id: 1,

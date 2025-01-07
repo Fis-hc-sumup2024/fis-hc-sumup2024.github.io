@@ -1,7 +1,8 @@
 export type CheckInType = {
   account: string;
+  accountDisplay: string;
   dateTime: string;
-  diagnosId: string;
+  diagnosId: number;
   code: number;
 };
 
@@ -13,4 +14,8 @@ export type OptionType = {
 export type DiagnosType = {
   id: number;
   diagnosName: string;
+};
+
+export type Treatment = {
+  [key: string]: string | undefined;
 };

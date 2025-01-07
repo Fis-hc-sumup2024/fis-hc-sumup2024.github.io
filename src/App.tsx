@@ -41,9 +41,7 @@ function App() {
       }
     >
       <Layout>
-        {data && !isLoading && (
-          <Home localData={localData} setLocalData={setLocalData} />
-        )}
+        {data && !isLoading && <Home data={data} />}
         {!data && !isLoading && (
           <Welcome setLocalData={setLocalData} setIsLoading={setIsLoading} />
         )}

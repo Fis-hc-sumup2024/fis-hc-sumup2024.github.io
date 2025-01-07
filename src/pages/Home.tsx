@@ -1,16 +1,23 @@
 import Avatar from "../assets/avatar.png";
+import { diagnosCategories, diagnosItems } from "../common";
 import RobotAnswer from "../components/RobotAnswer";
 import Warning from "../components/Warning";
 import useInnerHeight from "../hooks/useInnerHeight";
-import { CheckInType } from "../type";
+import { CheckInType, Treatment } from "../type";
 
 interface HomeProps {
-  localData?: CheckInType | null;
-  setLocalData?: (newValue: CheckInType | null) => void;
+  data: CheckInType | null;
 }
 
-const Home: React.FC<HomeProps> = () => {
+const Home: React.FC<HomeProps> = ({ data }) => {
   const innerHeight = useInnerHeight();
+
+  const diagnosItem = diagnosItems.find(
+    (item) => item.id === Number(data?.diagnosId)
+  );
+  const diagnosCategory = diagnosCategories.find(
+    (item) => item.id === diagnosItem?.diagnosId
+  );
 
   return (
     <div className="h-full flex-grow flex flex-col justify-center">
@@ -28,7 +35,7 @@ const Home: React.FC<HomeProps> = () => {
             className="bg-white rounded-full border-[3px] border-[#72E2F0]"
           />
         </div>
-        <h2 className="font-semibold">Chào PhuongNB4</h2>
+        <h2 className="font-semibold">Chào {data?.accountDisplay}</h2>
         <p>Số may mắn của bạn là</p>
         <p
           style={{
@@ -37,7 +44,7 @@ const Home: React.FC<HomeProps> = () => {
           }}
           className="text-[#72E2F0] text-xl text-center items-center"
         >
-          72
+          {data?.code}
         </p>
       </div>
       <div className="flex flex-col items-center">
@@ -46,11 +53,21 @@ const Home: React.FC<HomeProps> = () => {
           <Warning className="ml-[-40px] z-10" />
         </div>
         <div className="gap-6 pt-10 pb-8 px-4 w-full bg-white-blur-15 backdrop-blur-[20px] rounded-[20px] text-center border border-white-blur-15">
-          <p>Năm 2024 bạn được chẩn đoán bị ám ảnh deadline</p>
           <p>
-            Dr.AI dành cho bạn lời khuyên Deadline chạy bộ “Deadline dí, nhưng
-            bạn nhanh hơn deadline”
+            Năm 2024 bạn được chẩn đoán bị{" "}
+            <span className="font-bold">"{diagnosCategory?.diagnosName}"</span>
           </p>
+          {diagnosItem &&
+            Object.keys(diagnosItem?.treatment).map(
+              (key: string, index: number) => (
+                <p key={`${key}-${index}`}>
+                  {key}:{" "}
+                  <span className="font-bold">
+                    {(diagnosItem?.treatment as Treatment)[key] ?? ""}
+                  </span>
+                </p>
+              )
+            )}
         </div>
       </div>
     </div>

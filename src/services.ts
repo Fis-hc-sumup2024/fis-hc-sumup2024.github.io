@@ -43,9 +43,11 @@ export const checkin = async (body: CheckInType) => {
 
 export const checkinProcess = async ({
   account,
+  accountDisplay,
   diagnosId,
 }: {
   account: string;
+  accountDisplay: string;
   diagnosId: number;
 }): Promise<CheckInType[] | undefined> => {
   try {
@@ -57,8 +59,9 @@ export const checkinProcess = async ({
 
     const checkIn = {
       account,
+      accountDisplay,
       dateTime: new Date().toISOString(),
-      diagnosId: getRandomItemByDiagnosId(diagnosId),
+      diagnosId: getRandomItemByDiagnosId(diagnosId)?.id,
       code: getRandomWithIgnore(
         checkinList.map((item: CheckInType) => item.code)
       ),
