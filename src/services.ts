@@ -55,7 +55,7 @@ export const checkinProcess = async ({
     const existItem = checkinList.find(
       (item: CheckInType) => item.account === account
     );
-    if (existItem) return existItem;
+    if (existItem) return [existItem];
 
     const checkIn = {
       account,
