@@ -1,11 +1,13 @@
 import axiosInstance from "./axios-instance";
 import { getRandomItemByDiagnosId, getRandomWithIgnore } from "./common";
-import { sheetId } from "./config";
+import { location, sheetId } from "./config";
 import { CheckInType } from "./type";
 
 export const getCheckinList = async () => {
   try {
-    const checkinListRes = await axiosInstance.get(sheetId);
+    const checkinListRes = await axiosInstance.get(
+      `${sheetId}/tabs/${location}`
+    );
     return checkinListRes.data;
   } catch (error) {
     console.log(error);
@@ -18,7 +20,7 @@ export const getCheckinData = async (
 ): Promise<CheckInType | undefined> => {
   try {
     const checkinListRes = await axiosInstance.get(
-      `${sheetId}/account/${account}`
+      `${sheetId}/tabs/${location}/account/${account}`
     );
     if (checkinListRes?.data)
       return checkinListRes.data.find(
@@ -28,16 +30,6 @@ export const getCheckinData = async (
   } catch (error) {
     console.log(error);
     return undefined;
-  }
-};
-
-export const checkin = async (body: CheckInType) => {
-  try {
-    const checkinRes = await axiosInstance.post(sheetId, body);
-    return checkinRes.data;
-  } catch (error) {
-    console.log(error);
-    throw error;
   }
 };
 
@@ -52,21 +44,26 @@ export const checkinProcess = async ({
 }): Promise<CheckInType[] | undefined> => {
   try {
     const checkinList = await getCheckinList();
-    const existItem = checkinList.find(
+    const existItem: CheckInType = checkinList.find(
       (item: CheckInType) => item.account === account
     );
-    if (existItem) return [existItem];
+    if (existItem && existItem.checkinTime) return [existItem];
 
     const checkIn = {
       account,
       accountDisplay,
-      dateTime: new Date().toISOString(),
+      checkinTime: new Date().toISOString(),
       diagnosId: getRandomItemByDiagnosId(diagnosId)?.id,
-      code: getRandomWithIgnore(
-        checkinList.map((item: CheckInType) => item.code)
-      ),
+      code: existItem?.role
+        ? undefined
+        : getRandomWithIgnore(
+            checkinList.map((item: CheckInType) => item.code)
+          ),
     };
-    const checkinRes = await axiosInstance.post(sheetId, checkIn);
+    const checkinRes = await axiosInstance.patch(
+      `${sheetId}/tabs/${location}/account/${account}`,
+      checkIn
+    );
     return checkinRes?.data;
   } catch (error) {
     console.log(error);

@@ -23,6 +23,8 @@ function App() {
     { enabled: !!localData }
   );
 
+  const isCheckin = data?.checkinTime;
+
   return (
     <LoadingOverlay
       active={isLoading || isLoadingDOM}
@@ -41,11 +43,11 @@ function App() {
       }
     >
       <Layout>
-        {data && !isLoading && <Home data={data} />}
-        {!data && !isLoading && (
+        {isCheckin && !isLoading && <Home data={data} />}
+        {!isCheckin && !isLoading && (
           <Welcome setLocalData={setLocalData} setIsLoading={setIsLoading} />
         )}
-        {!data && !isLoading && <></>}
+        {!isCheckin && !isLoading && <></>}
       </Layout>
     </LoadingOverlay>
   );

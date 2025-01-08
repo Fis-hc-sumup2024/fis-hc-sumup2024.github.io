@@ -7,7 +7,7 @@ import { SingleValue } from "react-select";
 import { CheckInType, OptionType } from "../type";
 import { checkinProcess } from "../services";
 import useInnerHeight from "../hooks/useInnerHeight";
-import { regexValidAccount } from "../common";
+import { regexValidAccount, wait } from "../common";
 
 interface WelcomeProps {
   setLocalData?: (newValue: CheckInType | null) => void;
@@ -22,7 +22,8 @@ const Welcome = ({ setLocalData, setIsLoading }: WelcomeProps) => {
 
   const checkinMutation = useMutation({ mutationFn: checkinProcess });
 
-  const inValid = !inputAccount || !selectedOption || !regexValidAccount.test(inputAccount);
+  const inValid =
+    !inputAccount || !selectedOption || !regexValidAccount.test(inputAccount);
 
   const handleChange = (option: SingleValue<OptionType>) => {
     setSelectedOption(option);
@@ -41,7 +42,8 @@ const Welcome = ({ setLocalData, setIsLoading }: WelcomeProps) => {
         diagnosId: selectedOption.value,
       },
       {
-        onSuccess(checkinData?: CheckInType[]) {
+        async onSuccess(checkinData?: CheckInType[]) {
+          await wait(2000);
           if (checkinData && checkinData.length && setLocalData)
             setLocalData(checkinData[0]);
           if (setIsLoading) setIsLoading(false);

@@ -1,3 +1,4 @@
+import React from "react";
 import Avatar from "../assets/avatar.png";
 import { diagnosCategories, diagnosItems } from "../common";
 import RobotAnswer from "../components/RobotAnswer";
@@ -18,6 +19,8 @@ const Home: React.FC<HomeProps> = ({ data }) => {
   const diagnosCategory = diagnosCategories.find(
     (item) => item.id === diagnosItem?.diagnosId
   );
+
+  const isManager = data?.role;
 
   return (
     <div className="h-full flex-grow flex flex-col justify-center">
@@ -42,32 +45,47 @@ const Home: React.FC<HomeProps> = ({ data }) => {
             textShadow: "0px 1px 1px 0px #00000040",
             lineHeight: innerHeight > 750 ? "54.4px" : "36px",
           }}
-          className="text-[#72E2F0] text-xl text-center items-center"
+          className={`${
+            isManager ? "text-[#E20000]" : "text-[#72E2F0]"
+          } text-xl text-center items-center`}
         >
-          {data?.code}
+          {isManager ? "#$&?" : data?.code}
         </p>
       </div>
       <div className="flex flex-col items-center">
         <div className="flex">
-          <RobotAnswer className="ml-[35px] mb-[-55px] z-10" />
-          <Warning className="ml-[-40px] z-10" />
+          <RobotAnswer
+            className={`${isManager ? "ml-[35px]" : ""} mb-[-55px] z-10`}
+          />
+          {isManager && <Warning className="ml-[-40px] z-10" />}
         </div>
         <div className="gap-6 pt-10 pb-8 px-4 w-full bg-white-blur-15 backdrop-blur-[20px] rounded-[20px] text-center border border-white-blur-15">
-          <p>
-            Năm 2024 bạn được chẩn đoán bị{" "}
-            <span className="font-bold">"{diagnosCategory?.diagnosName}"</span>
-          </p>
-          {diagnosItem &&
-            Object.keys(diagnosItem?.treatment).map(
-              (key: string, index: number) => (
-                <p key={`${key}-${index}`}>
-                  {key}:{" "}
-                  <span className="font-bold">
-                    {(diagnosItem?.treatment as Treatment)[key] ?? ""}
-                  </span>
-                </p>
-              )
-            )}
+          {isManager ? (
+            <p>
+              Chào mừng đến với trạm không gian Công dân tương lai cùng
+              Healthcare
+            </p>
+          ) : (
+            <React.Fragment>
+              <p>
+                Năm 2024 Dr.AI chẩn đoán bạn bị{" "}
+                <span className="font-bold">
+                  "{diagnosCategory?.diagnosName}"
+                </span>
+              </p>
+              {diagnosItem &&
+                Object.keys(diagnosItem?.treatment).map(
+                  (key: string, index: number) => (
+                    <p key={`${key}-${index}`}>
+                      {key}:{" "}
+                      <span className="font-bold">
+                        {(diagnosItem?.treatment as Treatment)[key] ?? ""}
+                      </span>
+                    </p>
+                  )
+                )}
+            </React.Fragment>
+          )}
         </div>
       </div>
     </div>

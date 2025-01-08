@@ -1,7 +1,8 @@
 export type CheckInType = {
   account: string;
+  role: string;
   accountDisplay: string;
-  dateTime: string;
+  checkinTime: string;
   diagnosId: number;
   code: number;
 };
