@@ -7,7 +7,7 @@ export function randomNumber() {
 }
 
 export function getRandomWithIgnore(ignore: number[] = []): number {
-  const range = 250;
+  const range = 130;
   let randomNumber: number;
 
   do {

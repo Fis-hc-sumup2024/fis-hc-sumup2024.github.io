@@ -5,6 +5,7 @@ import RobotAnswer from "../components/RobotAnswer";
 import Warning from "../components/Warning";
 import useInnerHeight from "../hooks/useInnerHeight";
 import { CheckInType, Treatment } from "../type";
+import { hnAvatars } from "../registry";
 
 interface HomeProps {
   data: CheckInType | null;
@@ -27,14 +28,17 @@ const Home: React.FC<HomeProps> = ({ data }) => {
       <div
         style={
           innerHeight > 750
-            ? { gap: "16px", paddingTop: "32px", paddingBottom: "32px" }
-            : { gap: "4px", paddingTop: "8px", paddingBottom: "8px" }
+            ? { paddingTop: "32px", paddingBottom: "32px" }
+            : { paddingTop: "8px", paddingBottom: "8px" }
         }
-        className="flex flex-col items-center bg-white-blur-15 backdrop-blur-[20px] rounded-[20px] px-6 border border-white-blur-15"
+        className="flex flex-col gap-1 items-center bg-white-blur-15 backdrop-blur-[20px] rounded-[20px] px-6 border border-white-blur-15"
       >
         <div className="w-[138px] h-[138px] rounded-full flex items-center justify-center">
           <img
-            src={Avatar}
+            src={
+              hnAvatars.find((item) => item.account === data?.account)
+                ?.avatar ?? Avatar
+            }
             className="bg-white rounded-full border-[3px] border-[#72E2F0]"
           />
         </div>
