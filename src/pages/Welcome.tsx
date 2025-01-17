@@ -43,7 +43,7 @@ const Welcome = ({ setLocalData, setIsLoading }: WelcomeProps) => {
       },
       {
         async onSuccess(checkinData?: CheckInType[]) {
-          await wait(2000);
+          await wait(5000);
           if (checkinData && checkinData.length && setLocalData)
             setLocalData(checkinData[0]);
           if (setIsLoading) setIsLoading(false);
