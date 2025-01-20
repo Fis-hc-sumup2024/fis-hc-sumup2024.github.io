@@ -9,21 +9,24 @@ import { useLoading } from "./hooks/useLoading";
 import LoadingOverlay from "@achmadk/react-loading-overlay";
 import Lottie from "lottie-react";
 import groovyWalkAnimation from "./assets/anim.json";
+import { useState } from "react";
 
 function App() {
   const [isLoadingDOM, setIsLoading] = useLoading();
+  const [checkinDataBackup, setCheckinDataBackup] = useState<CheckInType>();
   const [localData, setLocalData] = useLocalStorage<CheckInType | null>(
     "localData",
     null
   );
 
   const { data, isLoading } = useQuery(
-    ["get-checkin-data", localData],
-    () => getCheckinData(localData?.account ?? ""),
+    ["get-checkin-data", localData, checkinDataBackup],
+    () =>
+      getCheckinData(localData?.account ?? checkinDataBackup?.account ?? ""),
     { enabled: !!localData }
   );
 
-  const isCheckin = data?.checkinTime;
+  const isCheckin = data?.checkinTime || checkinDataBackup?.checkinTime;
 
   return (
     <LoadingOverlay
@@ -43,9 +46,15 @@ function App() {
       }
     >
       <Layout>
-        {isCheckin && !isLoading && <Home data={data} />}
+        {isCheckin && !isLoading && (
+          <Home data={data?.checkinTime ? data : checkinDataBackup} />
+        )}
         {!isCheckin && !isLoading && (
-          <Welcome setLocalData={setLocalData} setIsLoading={setIsLoading} />
+          <Welcome
+            setLocalData={setLocalData}
+            setIsLoading={setIsLoading}
+            setCheckinDataBackup={setCheckinDataBackup}
+          />
         )}
         {!isCheckin && !isLoading && <></>}
       </Layout>

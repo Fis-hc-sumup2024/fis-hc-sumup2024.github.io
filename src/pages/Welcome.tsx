@@ -12,9 +12,14 @@ import { regexValidAccount, wait } from "../common";
 interface WelcomeProps {
   setLocalData?: (newValue: CheckInType | null) => void;
   setIsLoading?: (newValue: boolean) => void;
+  setCheckinDataBackup?: (newValue: CheckInType) => void;
 }
 
-const Welcome = ({ setLocalData, setIsLoading }: WelcomeProps) => {
+const Welcome = ({
+  setLocalData,
+  setIsLoading,
+  setCheckinDataBackup,
+}: WelcomeProps) => {
   const innerHeight = useInnerHeight();
   const [inputAccount, setInputAccount] = useState<string>();
   const [selectedOption, setSelectedOption] =
@@ -44,8 +49,10 @@ const Welcome = ({ setLocalData, setIsLoading }: WelcomeProps) => {
       {
         async onSuccess(checkinData?: CheckInType[]) {
           await wait(5000);
-          if (checkinData && checkinData.length && setLocalData)
-            setLocalData(checkinData[0]);
+          if (checkinData && checkinData.length) {
+            if (setLocalData) setLocalData(checkinData[0]);
+            if (setCheckinDataBackup) setCheckinDataBackup(checkinData[0]);
+          }
           if (setIsLoading) setIsLoading(false);
         },
       }

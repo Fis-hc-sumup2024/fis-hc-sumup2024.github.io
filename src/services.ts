@@ -57,7 +57,7 @@ export const checkinProcess = async ({
       code: existItem?.role
         ? undefined
         : getRandomWithIgnore(
-            checkinList.map((item: CheckInType) => item.code)
+            checkinList.map((item: CheckInType) => Number(item.code))
           ),
     };
     const checkinRes = await axiosInstance.patch(

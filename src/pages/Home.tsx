@@ -8,7 +8,7 @@ import { CheckInType, Treatment } from "../type";
 import { hnAvatars } from "../registry";
 
 interface HomeProps {
-  data: CheckInType | null;
+  data?: CheckInType | null;
 }
 
 const Home: React.FC<HomeProps> = ({ data }) => {
